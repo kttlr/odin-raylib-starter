@@ -83,6 +83,32 @@ How to use:
 - Compile and run by pressing using F7 / Ctrl + B / Cmd + B
 - After you make code changes and want to hot reload, just hit F7 / Ctrl + B / Cmd + B again
 
+## Neovim
+
+For those who use Neovim there is a file called `.neovimrc.lua` with the hot reload autocommand.
+
+There are two options to make this work.
+1. Enter the command `:luafile .neovimrc.lua` every time you open a new neovim session.
+2. Add the following to your Neovim config somewhere, like `init.lua`
+
+    ``` lua
+
+    local function load_project_config()
+    local nvimrc_path = vim.fn.getcwd() .. "/.nvimrc.lua"
+
+    if vim.fn.filereadable(nvimrc_path) == 1 then
+            vim.cmd("luafile " .. nvimrc_path)
+            -- Delay so the notify does not take over the initial buffer
+            vim.defer_fn(function()
+                vim.notify("Loaded project config: " .. nvimrc_path, vim.log.levels.INFO)
+            end, 500)
+        end
+    end
+
+    load_project_config()
+    ```
+This will automatically check for a `.nvimrc.lau` file and load it into your config.
+
 ## RAD Debugger
 You can hot reload while attached to [RAD Debugger](https://github.com/EpicGamesExt/raddebugger). Attach to your `game_hot_reload` executable, make code changes in your code editor and re-run the the `build_hot_reload` script to build and hot reload.
 
