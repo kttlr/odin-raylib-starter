@@ -107,7 +107,7 @@ There are two options to make this work.
 
     load_project_config()
     ```
-This will automatically check for a `.nvimrc.lau` file and load it into your config.
+This will automatically check for a `.nvimrc.lau` file and load it into your config. This approach allows you to use the autocommand from the project without the need for an extra plugin.
 
 ## RAD Debugger
 You can hot reload while attached to [RAD Debugger](https://github.com/EpicGamesExt/raddebugger). Attach to your `game_hot_reload` executable, make code changes in your code editor and re-run the the `build_hot_reload` script to build and hot reload.
